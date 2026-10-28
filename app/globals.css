@@ -1,26 +1,96 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  --color-pine: #1f3a2e;
+  --color-pine-700: #2b4a3c;
+  --color-pine-900: #142720;
+  --color-cream: #f6f1e7;
+  --color-cream-50: #fbf8f2;
+  --color-stone: #e7e0d2;
+  --color-cedar: #b5713f;
+  --color-cedar-600: #9c5e31;
+  --color-cedar-300: #e8b98f; /* accent on dark photos */
+  --color-ink: #1a1a1a;
+  --color-charcoal: #323434; /* logo color */
+  --color-sage: #8a9a8e;
+  --color-moss: #5d6b60;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --font-sans: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  --animate-kenburns: kenburns 22s ease-out forwards;
+
+  @keyframes kenburns {
+    from { transform: scale(1.12); }
+    to { transform: scale(1); }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-cream-50 text-ink font-sans antialiased;
+  }
+  ::selection {
+    @apply bg-cedar text-cream;
+  }
+}
+
+@utility eyebrow {
+  @apply text-xs font-medium uppercase tracking-[0.24em];
+}
+
+@utility container-x {
+  @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* DayPicker theming */
+:root .rdp-root {
+  --rdp-accent-color: var(--color-pine);
+  --rdp-accent-background-color: var(--color-stone);
+  --rdp-range_middle-background-color: var(--color-stone);
+  --rdp-range_start-date-background-color: var(--color-pine);
+  --rdp-range_end-date-background-color: var(--color-pine);
+  --rdp-day-height: 40px;
+  --rdp-day-width: 40px;
+  --rdp-day_button-height: 38px;
+  --rdp-day_button-width: 38px;
+  font-size: 14px;
+}
+:root .rdp-month_caption {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+}
+:root .rdp-month_caption {
+  font-weight: 400;
+  color: var(--color-pine);
+}
+:root .rdp-chevron {
+  fill: var(--color-pine);
+  width: 18px;
+  height: 18px;
+}
+:root .rdp-months {
+  gap: 2rem;
+}
+:root .rdp-weekday {
+  font-size: 11px;
+  color: var(--color-moss);
+}
+:root .rdp-today:not(.rdp-outside) {
+  color: var(--color-cedar);
 }
